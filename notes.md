@@ -17,3 +17,9 @@ the virtual DOM (document object model)
     - no. the virtual DOM is a pattern that is built into a variety of frameworks including react (and vue)
     - the shadow DOM is useful for styling, for things like making sliders and other built in CSS tools.
     - the shadow DOM is built into browsers and is not a pattern at all.
+
+- react limitations
+    - react is a library not a framework
+
+
+- function components are the future of react - away from class based and life cycles
