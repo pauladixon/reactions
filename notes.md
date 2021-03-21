@@ -93,36 +93,38 @@ the virtual DOM (document object model)
 
 - refs
     - what is the difference between refs and state variables?
-        - they are very similar  both objects that can contain values.
-        - but state variables are soemthing that can trigger a rerender, but refs don't. refs have a value that persist across renders - they can just hold on to something you might need.
+        - they are very similar 
+        - both are objects that can contain values, but state variables are something that can trigger a rerender, while refs cannot. refs have a value that persists across renders - they can just hold on to something you might need.
     - when is the best time to use a ref?
-        - great for library authors - where info remains stagnant. it literally says in the react documentation to not overuse them.
-        - managing focus or media
-            - use a ref to focus the input element on a modal?
-        - triggering animations
-            - somehting that is imperative and not state-driven
-        - integrating with DOM libraries
-            - ref gives 3rd party libraries something to grab on to for the DOM since the virtual DOM does not.
+        - it literally says in the react documentation to not overuse them, but:
+            - great for library authors - where info remains stagnant. 
+            - managing focus or media
+                - use a ref to focus the input element on a modal?
+            - triggering animations
+                - something that is imperative and not state-driven
+            - integrating with DOM libraries
+                - ref gives 3rd party libraries something to grab on to for the DOM since the virtual DOM does not.
     - what is the proper way to update a ref in a function component?
         - if you need to update a ref, useEffects to do so.
 
 - context 
     - what is the difference between Context API and prop drilling? (this is a very common question)
         - first of all, prop drilling is for explicitly stating props and values that a given child component can get.
-        - meanwhile, the context API implicitly states what values a given child component can have. witht the context api, you define something at the top level and put those values in at the top level, and then anything inside that component tree, anything that is within a given context at the top has access to the values that you give it.
-        - props need to be passed from compoennt to component to component. with this, you know exactly where certain values are being passed at any give time,  but you those values also can be manipulated on accident.
-        - but with a context api, beacuse the values are defined at the top level and can be access/manipulated at any level of the tree, you might have some unncessary rerenders. something to be aware of.
+        - meanwhile, the context API implicitly states what values a given child component can have. with the context api, you define something at the top level and put those values in at the top level, and then anything inside that component tree, anything that is within a given context at the top has access to the values that you give it.
+        - props need to be passed from component to component to component. with this, you know exactly where certain values are being passed at any give time,  but you those values also can be manipulated on accident.
+        - but with a context api, beacuse the values are defined at the top level and can be accessed/manipulated at any level of the tree, you might have some unncessary rerenders. something to be aware of.
     - when shouldn't you use the context api?
-        - you shouldn't overuse it. be discernign to avoid rerenders. 
-        - i would only put what's absoltuely necessary at the top level of my application with context. everything else i would just make more context apis if they need to be shared, otherwise props are a perfectly good way of sharing different state values and refs.
-        - context is really useful for things like authentication or a website theme or something that really needs to be shared across an application tree, but itss not something you need to keep track of a lot of different clicks or something.
+        - you shouldn't overuse it. be discerning to avoid rerenders. 
+        - i would only put what's absolutely necessary at the top level of my application with context. everything else i would just make more context apis if they need to be shared, otherwise props are a perfectly good way of sharing different state values and refs.
+        - context is really useful for things like authentication or a website theme or something that really needs to be shared across an application tree, but its not something you need to keep track of a lot of different clicks or something.
         - this is somethign that came out of redux popularity but led to a lot of rerenders.
 
 - misc.
     - what is a fragment?
-        - kind of nothing. they're containers to hold onto different elements. with react you need to return only one element every single time - to avoid 10 layer divs and how that can mess up design elements. makes sure you're only returning one individual thing.
-    - when should you used a class based component vs function components?
-        - class components are becomign outdated and function components are the future of react. all the new features of react are geared toward function based components. 
+        - kind of nothing. they're containers to hold onto different elements. with react you need to return only one element every single time 
+        - these are to avoid 10 layer divs and how that can mess up design elements. makes sure you're only returning one individual thing.
+    - when should you use a class based component vs function components?
+        - class components are becoming outdated and function components are the future of react. all the new features of react are geared toward function based components. 
         - the only thing you absolutely need to use class based components for is 'error boundaries'. 
             - error boundaries are react components that catch javascript errors anywhere in the child component tree. they log those errors, they display a fallback UI instead of the component tree that crashed. 
             - they catch a lot of errors during rendering and in lifecycle methods and in constructors of the entire tree below them. they're pretty neat, but you need class based components for them because there aren't any hooks geared for them yet.
@@ -132,6 +134,9 @@ the virtual DOM (document object model)
         - a way to render children into a DOM node that exists outside of the DOM hierarchy of the parent component. it can live anywhere in the DOM tree and you most often see it in UI components like modals where the modal lives separately from the entire tree of different components containing each other.
     - what are controlled and uncontrolled components?
         - uncontrolled components are input values - some sort of user manipulated component. something that the user controls and not that react controls. 
-        - controlled components are a solution to the potential discrepancies ebtween the virtual DOM and the real DOM ( if you had jQuery and React on the same site, for instance). where you have a given input and react controls it - it controls the state changes happening in it and react to those state changes. it is the thing that contains that component. jquery can't touch it, and react can prevent a user from interacting with it.
+        - controlled components are a solution to the potential discrepancies between the virtual DOM and the real DOM (if you had jQuery and React on the same site, for instance). where you have a given input and react controls it 
+            - react controls the state changes happening in it and reacts to those state changes. it is the thing that contains that component. jquery can't touch it, and react can prevent a user from interacting with it.
 
     - convert from a class based component to a function based component:
+        ![image3](https://i.imgur.com/VoPouej.png) 
+        vs ![image4](https://i.imgur.com/kEYdtFv.png)
