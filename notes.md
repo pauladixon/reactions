@@ -1,6 +1,24 @@
 the virtual DOM (document object model)
 
+- what is react?
+    - react is a front-end js library developed by facebook in 2011.
+    - it follows the componenet based approach that helps create reusable UI components
+    - it is used to develop a complex and interactive web and mobile interface
+    - even though it only became open source in 2015, it has one of the largest communities backing it.
+    - it uses the virtual DOM instead of the real DOM
+    - it uses server side rendering (backend)
+    - it follows the unidirectional data flow or the data binding
+    - react native is a mobile framework that compiles into native app components, allowing us to build native mobile apps (iOS, Android, and Windows) in Javascript which allows us to use ReactJS to build our components and implements ReactJS
+    - reactJS only covers the user interface layer of an application
+- what are the main benefits of using react?
+    - it increases performance of the application
+    - it can be easily used on the client side as well as the server side
+    - high code readability due to jsx
+    - easy to integrate with frameworks like meteor, angular, etc.
+    - writing user interface tests is easier
+
 - what is the different between the virtual DOM and the real DOM?
+    - In React, for every DOM object, there is a corresponding “virtual DOM object.” A virtual DOM object is a representation of a DOM object, like a lightweight copy. A virtual DOM object has the same properties as a real DOM object, but it lacks the real thing’s power to directly change what’s on the screen. Manipulating the DOM is slow. Manipulating the virtual DOM is much faster, because nothing gets drawn onscreen. Think of manipulating the virtual DOM as editing a blueprint, as opposed to moving rooms in an actual house.
     - virtual DOM
         - can't directly update html
         - acts as a copy of the real DOM which can be manipulated and updated with a page refresh
@@ -28,15 +46,21 @@ the virtual DOM (document object model)
     - the documentation 
         - it's mostly up to date, but it doesn't have enough information on functional components vs class based, even though they're the future of react.
         - the documentation isn't linear and hard to navigate. this means that the learning curve is really difficult.
+    - coding can become complex because it uses both inline and JSX models
 
 - jsx
     - bread and butter of react
-    - short for javascript xml. 
+    - short for javascript xml. (or javascript extension)
+    - browsers cannot read jsx
+        - browsers can only read javascript objects but jsx is not a standard javascript object
+        - browsers can read JSX after transformation to a javascript object using a transformer like babel
     - it allows you to write javascript with an html-like template syntax. this is not the same thing as just putting html in your javascript or writing html or a string that gets inserted into html. 
     - the templates that you use produce elements that represent objects
     - you CAN write react without jsx - you could use React.createElement for all your elements, but using jsx is much easier.
     - difference looks like 
-        ![image](https://i.imgur.com/3oRoTWf.png) vs ![image2](https://i.imgur.com/4ZFl7EM.png)
+        - ![image](https://i.imgur.com/3oRoTWf.png) 
+        - vs 
+        - ![image2](https://i.imgur.com/4ZFl7EM.png)
     - difference between an element and a component
         - an element is something that is created by jsx as an object
         - a component is a function that returns an object. components are functions of elements.
@@ -57,15 +81,23 @@ the virtual DOM (document object model)
         - all react components must act like pure functions with respect to their props. they always return the same output for the same input.
             - pure functions are functions that return identical values for identical arguments.
             - pure components are components that do not rerender when the value or state/props have been updated with the same value.
+    - a parent component can pass event handlers as props to child components and then they can be used to handle an event. thus we say that an event raised in a child component can be handled in a parent component.
 
 - state and lifecycle
     - what is the difference between props and state?
         - both are js objects. both hold information that influences what will be rendered, but props get passed to a component (kind of like function parameters), while state is mananged within a given component. 
-        - state is kind of like variables declared within a function. they are scoped within that function. state is local to a given component. you cannot access state outside a given component unless you pass it with props. it is completely inside, scoped and local, within a given component.
+        - state is 
+            - kind of like variables declared within a function. they are scoped within that function. state is local to a given component. you cannot access state outside a given component unless you pass it with props. it is completely inside, scoped and local, within a given component.
+            - state is an internal data store (object) of a component as well as a permanent storage.
+            - to update state in react forcefully, use forceUpdate
+            - setState
+                - the second argument is to call code after the setState operation is complete
+                - when the new state is dependent on the old state, it is recommended to pass this.setState as a function instead of as an object.
     - what is the difference between state in a class component vs state in a function component?
         - for state in a class component, you use a function called this.getState(). this is something that is attached to a class object. the component in a react class is an object and the state is something that persists across that class component.
         - state in a function component is something that is recalled multiple times. because a function component isn't an object that persists over time, where its something that you manipulate. it is something that is recalled over time, every single time state changes. that is the high level answer
         - state persists in a class component, state is recalled in a function component.
+        - a component can only return one element.
     - what is the component lifecycle? 
         - state kind of controls the component lifecycle
         - mounting (first appearance)
@@ -106,6 +138,9 @@ the virtual DOM (document object model)
                 - ref gives 3rd party libraries something to grab on to for the DOM since the virtual DOM does not.
     - what is the proper way to update a ref in a function component?
         - if you need to update a ref, useEffects to do so.
+    - refs are used to assign references to DOM elements. refs can be created by:
+        - calling the react.createref method
+        - assigning a value to the ref attribute in JSX
 
 - context 
     - what is the difference between Context API and prop drilling? (this is a very common question)
@@ -128,6 +163,7 @@ the virtual DOM (document object model)
         - the only thing you absolutely need to use class based components for is 'error boundaries'. 
             - error boundaries are react components that catch javascript errors anywhere in the child component tree. they log those errors, they display a fallback UI instead of the component tree that crashed. 
             - they catch a lot of errors during rendering and in lifecycle methods and in constructors of the entire tree below them. they're pretty neat, but you need class based components for them because there aren't any hooks geared for them yet.
+        - function components are light weight and faster than class based components.
     - what is a higher ordered component (HOC)?
         - this is a function that takes IN a component and it returns a new component. it is used for reusing component logic and it isn't a react API thing its just a pattern that emerged within react.
     - what is a portal?
@@ -136,7 +172,17 @@ the virtual DOM (document object model)
         - uncontrolled components are input values - some sort of user manipulated component. something that the user controls and not that react controls. 
         - controlled components are a solution to the potential discrepancies between the virtual DOM and the real DOM (if you had jQuery and React on the same site, for instance). where you have a given input and react controls it 
             - react controls the state changes happening in it and reacts to those state changes. it is the thing that contains that component. jquery can't touch it, and react can prevent a user from interacting with it.
-
+        - to upload a file from a react component, a developer must write an uncontrolled component. a file upload cannot be done from a controlled component because it requires user input.
+    - what is the render() method in react?
+        - it returns a single react element while is the representation of the native DOM component.
+    - what are the differences between react and angular?
+        - in react, the render is built on the server side instead of with angular where the render is built on the client side
+        - in react there is only a one-way data link, but with angular there is a bi-directional data link
+    - keys
+        - keys are given to a list of elements in react. these keys should be unique among the siblings only
+        - used to improve performance
+    - babel is both a compiler and a transpiler
+    - 8080 is the webpack dev server
+    - webpack commands act as a mondule bundler
     - convert from a class based component to a function based component:
-        ![image3](https://i.imgur.com/VoPouej.png) 
-        vs ![image4](https://i.imgur.com/kEYdtFv.png)
+        - ![image3](https://i.imgur.com/VoPouej.png) vs ![image4](https://i.imgur.com/kEYdtFv.png)
